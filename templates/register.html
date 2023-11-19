@@ -1,0 +1,19 @@
+{% extends "loginlayout.html" %}
+
+{%block body%}
+    <div class="loginForm">
+        <img src="../static/img/religion-faith-pray-man.jpg" alt="bibleAppLogin2.jpg" class="image">
+        <form action="/register" method="post" class="login">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <div class="userType">
+                <label for="pastor">Pastor</label>
+                <input type="radio" id="pastor" name="isPastor" value="pastor">
+                <label for="notpastor">Under Pastor</label>
+                <input type="radio" id="notpastor" name="isPastor" value="notpastor" selected>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+{%endblock%}

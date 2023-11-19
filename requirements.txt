@@ -1,0 +1,7 @@
+flask
+flask_cors
+functools
+secrets
+boto3
+pymysql
+os

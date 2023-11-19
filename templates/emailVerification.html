@@ -1,0 +1,26 @@
+{% extends "loginlayout.html" %}
+
+{%block body%}
+    <div class="loginForm">
+        <img src="../static/img/religion-faith-pray-man.jpg" alt="bibleAppLogin2.jpg" class="image">
+        <form action="/emailVerification" method="post" class="login">
+            <input type="text" name="confirmationCode" placeholder="Confirmation Code" required>
+            <input type="hidden" name="username" value={{username}} required >
+            <input type="hidden" name="password" value={{password}}  required >
+            <input type="hidden"  name="isPastor" value={{isPastor}} required >
+            <input type="hidden"  name="email" value={{email}} required >
+            {%if isPastor == "notpastor"%}
+            <div class="pastorSelection">
+                <label for="pastors">whose your pastor:</label>
+                <select name="pastors" id="pastors">
+                    <option value="pastor" disabled selected>Select Pastor</option>
+                    {% for pastor in pastors %}
+                    <option value={{pastor}}>{{pastor}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {%endif%}
+            <button type="submit">Confirm</button>
+        </form>
+    </div>
+{%endblock%}

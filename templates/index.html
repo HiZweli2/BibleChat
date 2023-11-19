@@ -1,0 +1,75 @@
+{%extends "layout.html" %}
+
+{%block title%}
+Home
+{%endblock%}
+
+{%block body%}
+<header id="bibleNav">
+    <div class="bibleItems">
+        <div id="bible">
+            <select name="table" class="bibleTranslations" >
+                <option value="NIV" selected disabled>NIV</option>
+              </select>
+        </div>
+        <div id="book">
+            <select name="book" class="bibleTranslations" id="selectedBook">
+                <option value="book" selected disabled>book</option>
+                {% for book in books %}
+                        <option value="{{book[0]}}">{{book[0]}}</option>
+                {% endfor %}
+              </select>
+        </div>
+        <div id="chapter">
+            <select name="chapter" class="bibleTranslations" id="bookchapter">
+                <option value="chapter" selected disabled>chapter</option>
+              </select>
+        </div>
+        <div id="verse">
+            <select name="verse" class="bibleTranslations" id="bookverse">
+                <option value="verse" selected disabled>verse</option>
+              </select>
+        </div>
+        <div id="users">
+            <select name="users" class="bibleTranslations" id="recipient">
+                <option value="users" selected disabled>users</option>
+                {%for user in users%}
+                    <option value="{{user[0]}}">{{user[1]}}</option>
+                {%endfor%}
+              </select>
+        </div>
+    </div>
+</header>
+<section class="messages" id="reloadedMessages">
+        <div id="chats">
+            {%if chats | length >= 1%}
+                {%for chat in chats%}
+                    {%if chat[0] == user_id %}
+                        {%set class = "sentMessage"%}
+                    {%else%}
+                        {%set class = "scriptureContainer"%}
+                    {%endif%}
+                    <div class={{class}}>
+                        {%if chat[2] == None %}
+                            <p class="receivedMessageParagraph">{{chat[3]}} </p>
+                        {%else%}
+                            <p class="receivedMessageParagraph">{{chat[2]}} <br><br> {{chat[3]}} </p>
+                        {%endif%}
+
+                    </div>
+                {%endfor%}
+            {%endif%}
+        </div>
+        <div class="scriptureContainer" id="currentScripture">
+        </div>
+        <div class="messageInput">
+            <textarea name="currentUserMessage" class="currentUserMessage" cols="30" rows="5" id="typedMessage"></textarea>
+            <button id="sendMessagebutton">SEND</button>
+        </div>
+</section>
+<form action="/" method="get">
+    <button type="submit" id="reloadButton">
+         <img src="../static/img/refresh-page-option.png" alt="refresh-page-option.png" id="refresh-page-option">
+    </button>
+</form>
+{%endblock%}
